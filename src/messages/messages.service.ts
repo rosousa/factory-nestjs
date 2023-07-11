@@ -25,7 +25,7 @@ export class MessagesService {
     if (!message) {
       throw Error(`Mensagem com o id ${id} não encontrada.`);
     }
-    return;
+    return message;
   }
 
   public create(messageDto: MessageDto) {
