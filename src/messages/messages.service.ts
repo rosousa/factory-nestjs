@@ -16,4 +16,8 @@ export class MessagesService {
   public findAll() {
     return this.messages;
   }
+
+  public findById(id: number) {
+    return this.messages.find((message) => message.id === id);
+  }
 }
