@@ -28,6 +28,10 @@ export class PokemonService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+    return this.prismaService.pokemon.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
