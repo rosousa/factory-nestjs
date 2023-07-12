@@ -5,14 +5,27 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PokemonService {
+  private readonly _include = {
+    images: {
+      select: {
+        url: true,
+      },
+    },
+  };
+
   constructor(private readonly prismaService: PrismaService) {}
 
   create(data: CreatePokemonDto) {
-    return this.prismaService.pokemon.create({ data });
+    return this.prismaService.pokemon.create({
+      data,
+      include: this._include,
+    });
   }
 
   findAll() {
-    return this.prismaService.pokemon.findMany();
+    return this.prismaService.pokemon.findMany({
+      include: this._include,
+    });
   }
 
   findOne(id: number) {
@@ -20,6 +33,7 @@ export class PokemonService {
       where: {
         id,
       },
+      include: this._include,
     });
   }
 
@@ -29,6 +43,7 @@ export class PokemonService {
         id,
       },
       data,
+      include: this._include,
     });
   }
 
